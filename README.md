@@ -2,7 +2,7 @@
 
 Work in Progress. 
 
-The goal for this is to have a bit of a creative exercise with Selenium in having the driver look up the title of a movie, find the data for it, and create a markdown file that will be able to be placed in a 
+The goal for this is to have a bit of a creative exercise with Selenium in having the driver look up the title of a movie, find the data for it, and create a markdown file that will be placed in a user's system.
 
 ## Tools
 - Python 3.14.3
