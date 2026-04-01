@@ -30,9 +30,9 @@ infobox = wait.until(
 EC.presence_of_element_located((By.CSS_SELECTOR, "[data-react-module-id='titles']"))
 )
 # Find Title and Send to the Movie Object.
-# Title
-title = infobox.find_element(By.CSS_SELECTOR, "h2").text
-Movie.title = title
+title = wait.until(
+EC.presence_of_element_located((By.CSS_SELECTOR, "h2")))
+Movie.title = title.text
 
 # All the metadata pills pulled
 meta_items = infobox.find_elements(By.CSS_SELECTOR, "li span")
@@ -40,7 +40,7 @@ meta_items = infobox.find_elements(By.CSS_SELECTOR, "li span")
 labels = ["meta1", "meta2", "meta3", "meta4"]
 meta = ""
 for label, item in zip(labels, meta_items):
-     meta += item.text + " "
+     meta += item.text + " |"
   #  print(f"{label}:  ", item.text)
 Movie.meta = meta
 
@@ -56,3 +56,9 @@ print(Movie.title)
 print(Movie.meta)
 print(Movie.description)
 # TODO: Save .md file to system
+with open(f"{Movie.title}.md", "w") as f:
+    f.write(f"## {Movie.title}\n")
+    f.write(f"{Movie.meta}\n\n")
+    f.write(f"### Description\n\n")
+    f.write(f"{Movie.description}\n\n")
+    f.write(f"---\n")
