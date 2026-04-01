@@ -8,8 +8,11 @@ import time
 searchTerm = input("What is the movie title? ")
 driver = webdriver.Firefox()  # or Firefox, etc.
 
-# Empty Object for "Movie" Class to be passed
+# TODO: Send file to desired location
+# TODO: Introduce Console
+# TODO: Research tkinter?
 
+# Empty Object for "Movie" Class to be passed
 class Movie:
     def __init__(self, title, description, meta):
         self.title = ""
