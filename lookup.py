@@ -8,7 +8,13 @@ import time
 searchTerm = input("What is the movie title? ")
 driver = webdriver.Firefox()  # or Firefox, etc.
 
-# TODO: Object for "Movie" Class to be passed
+# Empty Object for "Movie" Class to be passed
+
+class Movie:
+    def __init__(self, title, description, meta):
+        self.title = ""
+        self.description = ""
+        self.meta = ""
 
 driver.get("https://duckduckgo.com")
 
@@ -23,28 +29,30 @@ wait = WebDriverWait(driver, 10)
 infobox = wait.until(
 EC.presence_of_element_located((By.CSS_SELECTOR, "[data-react-module-id='titles']"))
 )
-# TODO: Send Title to Movie Object
+# Find Title and Send to the Movie Object.
 # Title
 title = infobox.find_element(By.CSS_SELECTOR, "h2").text
-print("Title:  ", title)
+Movie.title = title
 
-# TODO: Handle labels better; it differs each movie.
-# TODO: Send Labels to Movie Object
-# All the metadata pills (rating, year, runtime, genre)
+# All the metadata pills pulled
 meta_items = infobox.find_elements(By.CSS_SELECTOR, "li span")
-labels = ["label1", "label2", "label3", "label4"]
+# Taking just the first 4 and adding them together
+labels = ["meta1", "meta2", "meta3", "meta4"]
+meta = ""
 for label, item in zip(labels, meta_items):
-# Making space to put tags at the beginning of the doc
-    print(f"{label}:  ", item.text)
+     meta += item.text + " "
+  #  print(f"{label}:  ", item.text)
+Movie.meta = meta
 
-# TODO: Send Description to Movie Object
-# Pull the description separately because it likes being a diva, I guess
+# Pull the description and send to Movie Object
 desc = infobox.find_element(By.CSS_SELECTOR, "p").text
-print("Description: " + desc)
+Movie.description = desc
+# print("Description: " + desc)
 time.sleep(2)
 driver.quit()
-# TODO: New Object renamed the title
 
 # TODO: Send newly titled Object to markdown: Title for the "file name.md", with the labels up top followed by Year and Runtime in normal paragraph and the description after a ### Description Header
-
+print(Movie.title)
+print(Movie.meta)
+print(Movie.description)
 # TODO: Save .md file to system
