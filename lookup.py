@@ -41,21 +41,20 @@ labels = ["meta1", "meta2", "meta3", "meta4"]
 meta = ""
 for label, item in zip(labels, meta_items):
      meta += item.text + " |"
-  #  print(f"{label}:  ", item.text)
 Movie.meta = meta
 
 # Pull the description and send to Movie Object
 desc = infobox.find_element(By.CSS_SELECTOR, "p").text
 Movie.description = desc
-# print("Description: " + desc)
 time.sleep(2)
 driver.quit()
 
-# TODO: Send newly titled Object to markdown: Title for the "file name.md", with the labels up top followed by Year and Runtime in normal paragraph and the description after a ### Description Header
+# Print example before item creation
 print(Movie.title)
 print(Movie.meta)
 print(Movie.description)
-# TODO: Save .md file to system
+
+# Creation of .md file
 with open(f"{Movie.title}.md", "w") as f:
     f.write(f"## {Movie.title}\n")
     f.write(f"{Movie.meta}\n\n")
